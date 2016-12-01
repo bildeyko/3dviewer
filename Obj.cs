@@ -55,7 +55,7 @@ namespace Viewer
                 {
                     float x, y, z;
                     var currentLine = reader.ReadLine();
-                    //If it is comment;
+
                     if (currentLine.StartsWith("#"))
                         continue;
                     if (currentLine.StartsWith("v "))
