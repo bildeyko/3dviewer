@@ -15,6 +15,12 @@ namespace Viewer
         public Vector2[] VT = new Vector2[4];
         public Vector3[] VN = new Vector3[4];
     }
+
+    public class Group
+    {
+        public string name;
+        public List<Faces> F = new List<Faces>();
+    }
     public class Obj
     {
         /// <summary>
@@ -38,6 +44,11 @@ namespace Viewer
         public List<Faces> F = new List<Faces>();
 
         /// <summary>
+        /// Groups
+        /// </summary>
+        public List<Group> G = new List<Group>();
+
+        /// <summary>
         /// OpenGL primitive type
         /// </summary>
         public PrimitiveType PrimitiveType;
@@ -49,12 +60,13 @@ namespace Viewer
 
         public void LoadFile(string file)
         {
+            int groupIndex = -1;
             using (var reader = new StreamReader(file))
             {
                 while (reader.Peek() >= 0)
                 {
                     float x, y, z;
-                    var currentLine = reader.ReadLine();
+                    var currentLine = reader.ReadLine();                    
 
                     if (currentLine.StartsWith("#"))
                         continue;
@@ -113,11 +125,22 @@ namespace Viewer
                                 face.V[i] = this.V[Int32.Parse(components[0]) - 1];
                             if (!String.IsNullOrWhiteSpace(components[1]))
                                 face.VT[i] = this.VT[Int32.Parse(components[1]) - 1];
-                            //							if (!String.IsNullOrWhiteSpace (components [2]))
-                            //	face.VN [i] = objFile.VN [Int32.Parse (components [1]) - 1];
+                            if (!String.IsNullOrWhiteSpace (components [2]))
+                            	face.VN [i] = this.VN [Int32.Parse (components [2]) - 1];
                             i++;
                         }
-                        this.F.Add(face);
+                        if(groupIndex != -1)
+                            this.G[groupIndex].F.Add(face);
+                        else
+                            this.F.Add(face);
+                    }
+                    else if (currentLine.StartsWith("o "))
+                    {
+                        currentLine = currentLine.Remove(0, 2);
+                        var group = new Group();
+                        group.name = currentLine;
+                        groupIndex++;
+                        this.G.Add(group);
                     }
                 }
             }
