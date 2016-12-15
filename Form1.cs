@@ -23,6 +23,7 @@ namespace Viewer
     /// colors http://prideout.net/archive/colors.php
     /// http://www.falloutsoftware.com/tutorials/gl/gl8.htm
     /// http://www.just.edu.jo/~yaser/courses/cs480/Tutorials/OpenGl%20-%20Light%20&%20Material%20-%20Part%20I.htm
+    /// texture http://stackoverflow.com/questions/14740331/adding-texture-to-a-plane-made-of-vertices
     /// </summary>
     public partial class Form1 : Form
     {
@@ -62,9 +63,9 @@ namespace Viewer
 
             GL.Light(LightName.Light0, LightParameter.Position, new float[] { 3.0f, 3.0f, 3f });
             GL.Light(LightName.Light0, LightParameter.SpotDirection, new float[] { -1.0f, -1.0f, -1.0f });
-            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.2f, 0.2f, 0.2f, 0.5f });
-            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 0.2f, 0.2f, 0.2f, 0.2f });
-            GL.Light(LightName.Light0, LightParameter.Specular, new float[] { 0.2f, 0.2f, 0.2f, 0.2f });
+            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.2f, 0.2f, 0.2f, 1.0f });
+            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 0.2f, 0.2f, 0.2f, 1.0f });
+            GL.Light(LightName.Light0, LightParameter.Specular, new float[] { 0.2f, 0.2f, 0.2f, 1.0f });
             GL.LightModel(LightModelParameter.LightModelTwoSide, 1);
             GL.LightModel(LightModelParameter.LightModelLocalViewer, 1);
             GL.Enable(EnableCap.Lighting);
