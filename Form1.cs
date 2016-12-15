@@ -72,9 +72,7 @@ namespace Viewer
             GL.Enable(EnableCap.ColorMaterial);
 
             GL.Enable(EnableCap.Blend);
-            GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-
-            GL.ShadeModel(ShadingModel.Smooth);
+            GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);  
 
             GrassTextureID = UploadTexture("./Textures/asphalt.jpg");
             BuildingTextureID = UploadTexture("./Textures/building_1.jpg");
@@ -349,13 +347,10 @@ namespace Viewer
 
         public int UploadTexture(string pathname)
         {
-            // Create a new OpenGL texture object
             int id = GL.GenTexture();
 
-            // Select the new texture
             GL.BindTexture(TextureTarget.Texture2D, id);
 
-            // Load the image
             Bitmap bmp = new Bitmap(pathname);
 
             // Lock image data to allow direct access
@@ -386,7 +381,6 @@ namespace Viewer
                 TextureParameterName.TextureMagFilter,
                 (int)TextureMagFilter.Linear);
 
-            // Return the OpenGL object ID for use
             return id;
         }
 
