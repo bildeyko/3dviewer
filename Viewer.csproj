@@ -90,9 +90,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="textures\asphalt.jpg" />
+    <Content Include="textures\building_1.jpg" />
+    <Content Include="textures\Grass.jpg" />
+    <Content Include="textures\Grass2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy "$(ProjectDir)models\*.*" "$(TargetDir)\models" /Y /I /E</PreBuildEvent>
+    <PreBuildEvent>xcopy "$(ProjectDir)models\*.*" "$(TargetDir)\models" /Y /I /E
+xcopy "$(ProjectDir)textures\*.*" "$(TargetDir)\textures" /Y /I /E</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
